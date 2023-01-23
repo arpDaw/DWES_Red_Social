@@ -90,9 +90,16 @@
                     <a class="nav-link page-scroll" href="#pricing">PRICING</a>
                 </li>
             </ul>
-            <span class="nav-item">
-                    <a class="btn-outline-sm" href="log-in.html">LOG IN</a>
+            @auth
+                <span class="nav-item">
+                    <a class="btn-outline-sm" href="{{route('dashboard')}}">DASHBOARD</a>
                 </span>
+            @endauth
+            @guest
+            <span class="nav-item">
+                    <a class="btn-outline-sm" href="{{route('login')}}">LOG IN</a>
+                </span>
+            @endguest
         </div>
     </div> <!-- end of container -->
 </nav> <!-- end of navbar -->
@@ -108,7 +115,7 @@
                     <div class="text-container">
                         <h1>SaaS App HTML Landing Page</h1>
                         <p class="p-large">Use Tivo to automate your marketing actions in order to reach a much larger audience</p>
-                        <a class="btn-solid-lg page-scroll" href="sign-up.html">SIGN UP</a>
+                        <a class="btn-solid-lg page-scroll" href="{{route('register')}}">SIGN UP</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->
                 <div class="col-lg-6 col-xl-7">
