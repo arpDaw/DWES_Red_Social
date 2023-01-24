@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -15,23 +16,28 @@ class ImageController extends Controller
         $this->middleware('auth');
     }
 
+    public function uploadForm(){
+        return view('upload-image');
+}
     public function showUpForm(){
 
     }
     public function storeImage(Request $request){
         $image_path = $request->file('image');
-        $titulo = $request->file('titulo');
-        $user = \Auth::user();
 
+        $user_id = Auth::id();
         $image = new Image();
-        $image->user_id = $user->id;
-        $image->description = $titulo;
+        $image->user_id = $user_id;
+        $image->description = $request->input('description');
+
 
         if($image_path){
-            $image_path_name = time().$image_path;
-            Storage::disk('images')->put($image_path_name, File::get($image_path));
+            $image_path_name = time().$image_path->getClientOriginalName();
+            $image->image_path = $image_path_name;
+                Storage::disk('images_rrss')->put($image_path_name, File::get($image_path));
+            $image->save();
         }
-
+        return redirect()->route('upload-image');
 
     }
     public function showImages(){

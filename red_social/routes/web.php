@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/s', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -22,7 +24,20 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::prefix('dashboard')->group(function(){
+
+        Route::get('', [DashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::get('upload-image', [ImageController::class, 'uploadForm'])
+            ->name('upload-image');
+
+        Route::post('uploaded', [ImageController::class, 'storeImage'])
+        ->name('uploaded');
+
+    });
+
+
 });
+
+

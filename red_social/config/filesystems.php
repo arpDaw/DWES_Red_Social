@@ -55,6 +55,13 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+        'images_rrss' => [
+            'driver' => 'local',
+            'root' => storage_path('app/images_rrss'),
+            'url' => env('APP_URL').'/images_rrss',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
     ],
 
@@ -71,6 +78,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('images_rrss') => storage_path('app/images_rrss'),
     ],
 
 ];
