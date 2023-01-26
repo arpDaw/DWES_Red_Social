@@ -17,6 +17,6 @@ class CommentController extends Controller
         $comment->content = $request->input('content');
         $comment->image_id = $request->input('image_id');
         $comment->save();
-        return redirect()->route('/dashboard');
+        return redirect()->route('dashboard');
     }
 }

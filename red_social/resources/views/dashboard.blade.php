@@ -22,6 +22,9 @@
                             {{$images->links()}}
                             Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
                             <br>
+                            @foreach($comments as $comment)
+                                <p>1 comentario</p>
+                            @endforeach
                         </div>
                         <div class="w-full">
                             <form method="POST"  action="{{ route('upload-comment') }}"}}>

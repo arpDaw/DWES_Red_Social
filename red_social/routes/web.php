@@ -36,7 +36,7 @@ Route::middleware([
         Route::post('uploaded', [ImageController::class, 'storeImage'])
         ->name('uploaded');
 
-        Route::post('upload-comment', [CommentController::Class, 'storeComment'])
+        Route::post('upload-comment', [CommentController::class, 'storeComment'])
             ->name('upload-comment');
 
     });
