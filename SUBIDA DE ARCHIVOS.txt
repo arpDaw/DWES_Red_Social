@@ -1,0 +1,107 @@
+1. CREAR EL FORMULARIO DE SUBIDA
+
+2. CREAR EL CONTROLADOR 'ImageController' con los métodos para mostrar la vista del formulario y el método para guardar la imagen.
+
+3. CREAR LA RUTA PARA EL FORMULARIO Y LA RUTA PARA EL GUARDADO DE IMÁGENES
+
+4. CREAR EL DISCO 'IMAGENES' DONDE SE ALMACENARÁN LAS IMAGENES QUE FORMARÁN EL FEED DE CADA USUARIO
+
+5. En el método 'Save', que guardará la imagen, recogemos los datos del formulario y los almacenamos en dos variables. Los datos necesarios serán la descripción de la imagen y el nombre del archivo. (Imagen Adjunta)
+
+Ahora que ya tenemos la imagen guardada en el disco, vamos a guardar los datos necesarios en la tabla 'images'
+
+6. Instancia un objeto de la clase Image y guarda los campos necesarios, después llama al método save del modelo Image. Al comienzo de la página 4 tienes la forma de poder rescatar el id del usuario que está logueado en ese momento.
+
+7. La última acción del método Save del controlador será redigirte otra vez a la vista del formulario de subida.
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
+class ImageController extends Controller
+{
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    public function create(){
+        return view('image.create');
+    }
+
+    public function save(Request $request){
+
+        $validate = $this->validate($request, [
+           'titulo'=>'required',
+           'image'=>'required|mimes:jpg,jpeg,png,gif'
+        ]);
+
+
+
+        $image_path = $request->file('image');
+        $titulo = $request->input('titulo');
+
+
+        echo $image_path . "<br>";
+        echo $titulo;
+
+        //return view('welcome');
+        //var_dump($request);
+
+        $user = \Auth::user();
+
+        $image = new Image();
+
+        $image->user_id= $user->id;
+
+        $image->description = $titulo;
+
+
+        if($image_path){
+
+            $image_path_name = time().$image_path->getClientOriginalName();
+
+            Storage::disk('images')->put($image_path_name, File::get($image_path) );
+
+            $image->image_path = $image_path_name;
+        }
+
+        $image->save();
+
+        return redirect()->route('image.create');
+
+
+
+
+    }
+
+    public function getImage(){
+       // $file = Storage::disk('images')->get($filename);
+        // return new Response($file, 200);
+
+        foreach (Storage::disk('images')->files() as $file){ //devuelve la lista de archivos que hay dentro del disco en formato array. Cada uno de los elementos en realidad es el nombnre que tiene.
+            //$url= Storage::url($file);
+            //dump($url);
+            dump($file);
+            $url = asset(Storage::disk('images')->url($file));
+            dump($url);
+
+            $files[] = [
+                "url"=>$url
+            ];
+
+           // return view ('image.load', ["files" => $files]);
+
+
+            //echo "<img src='$url'>";
+            //$url = Storage::url();
+            //return view ('image.create');
+        }
+    }
+}

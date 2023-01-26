@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,9 @@ Route::middleware([
 
         Route::post('uploaded', [ImageController::class, 'storeImage'])
         ->name('uploaded');
+
+        Route::post('upload-comment', [CommentController::Class, 'storeComment'])
+            ->name('upload-comment');
 
     });
 
