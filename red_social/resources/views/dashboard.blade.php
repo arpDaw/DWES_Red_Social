@@ -22,14 +22,41 @@
                             {{$images->links()}}
                             Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
                             <br>
+
+                            <p>Número de comentarios: {{count($image->comments)}}</p>
+
                             @foreach($comments as $comment)
-                                <p>1 comentario</p>
+                                @if($image->id == $comment->image_id)
+
+
+                                <div>
+                                    "{{$comment->content}}" - Escrito por:
+                                    @foreach($users as $user)
+                                        @if($user->id == $comment->user_id)
+                                            <div class="hidden">{{ $commentAuthor = $user->username}}</div>
+                                        @endif
+                                    @endforeach
+                                            {{$commentAuthor}} Fecha: {{($comment->created_at)}}
+                                    @if($image->user_id == auth()->user()->id)
+                                        <form action="{{route('delete-comment')}}" method="POST">
+                                            @csrf
+                                            <input type="text" class="hidden" name="aBorrar" value="{{$comment->id}}">
+                                            <x-jet-button>Eliminar comentario</x-jet-button>
+                                        </form>
+
+                                    @endif
+                                </div>
+                                @endif
                             @endforeach
+
+
                         </div>
                         <div class="w-full">
                             <form method="POST"  action="{{ route('upload-comment') }}"}}>
 {{--                                action="{{ route('upload-comment') }}"--}}
                                 @csrf
+
+
                                 <textarea name="content" id="content" cols="100" rows="10" value="{{ __('content') }}"></textarea>
                                 <input type="hidden" name="image_id" value="{{$image->id}}">
                                 <br>

@@ -38,7 +38,8 @@ Route::middleware([
 
         Route::post('upload-comment', [CommentController::class, 'storeComment'])
             ->name('upload-comment');
-
+        Route::post('delete-comment', [CommentController::class, 'deleteComment'])
+            ->name('delete-comment');
     });
 
 
