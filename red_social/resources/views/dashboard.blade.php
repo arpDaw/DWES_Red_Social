@@ -12,6 +12,7 @@
                     <x-jet-button class="ml-4 mb-4"><a class="" href="{{route('upload-image')}}">upload-image</a></x-jet-button>
 
                 </div>
+
                 <div class="flex flex-row flex-col items-center mt-4">
                     @foreach($images as $image)
                         <div class="basis-1/2 w-full">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,9 @@ Route::middleware([
         Route::get('upload-image', [ImageController::class, 'uploadForm'])
             ->name('upload-image');
 
+        Route::get('perfil', [PerfilController::class, 'perfil'])
+            ->name('perfil');
+
         Route::post('uploaded', [ImageController::class, 'storeImage'])
         ->name('uploaded');
 
@@ -40,6 +44,7 @@ Route::middleware([
             ->name('upload-comment');
         Route::post('delete-comment', [CommentController::class, 'deleteComment'])
             ->name('delete-comment');
+
     });
 
 
