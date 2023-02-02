@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,12 @@ Route::middleware([
             ->name('upload-comment');
         Route::post('delete-comment', [CommentController::class, 'deleteComment'])
             ->name('delete-comment');
+
+        Route::get('like/{image_id}', [LikeController::class, 'like'])
+            ->name('like');
+        Route::get('dislike/{like_id}', [LikeController::class, 'dislike'])
+            ->name('dislike');
+
 
     });
 

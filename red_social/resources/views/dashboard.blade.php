@@ -1,5 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
+        <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script defer src="resources/js/like.js"></script>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
@@ -23,9 +25,12 @@
                             {{$images->links()}}
                             Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
                             <br>
+                            <div class="w-10">
+                                <img id="corason" src="images/Heart.svg" alt="corason">
+                            </div>
 
                             <p>Número de comentarios: {{count($image->comments)}}</p>
-
+                            <p>Número de likes: {{count($image->likes)}}</p>
                             @foreach($comments as $comment)
                                 @if($image->id == $comment->image_id)
 

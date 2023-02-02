@@ -37,6 +37,6 @@ class CommentController extends Controller
             );
         }
 //        return response(["id" => $request->id, "deleted"=>true], Response::HTTP_OK);
-        return redirect()->route('dashboard');
+
     }
 }
