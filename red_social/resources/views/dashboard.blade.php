@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script defer src="resources/js/like.js"></script>
+
+
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
@@ -25,9 +26,25 @@
                             {{$images->links()}}
                             Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
                             <br>
-                            <div class="w-10">
-                                <img id="corason" src="images/Heart.svg" alt="corason">
-                            </div>
+
+                                <div class="w-10">
+                                    @foreach($likes as $like)
+
+                                        @if($like->user_id === Auth::id())
+                                            <img class="like" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
+                                        @else
+                                            <img class="" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
+
+                                        @endif
+                                    @endforeach
+
+                                    @if(count($likes) == 0)
+                                            <img class="" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
+                                        @endif
+                                </div>
+
+
+
 
                             <p>Número de comentarios: {{count($image->comments)}}</p>
                             <p>Número de likes: {{count($image->likes)}}</p>

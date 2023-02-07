@@ -48,7 +48,7 @@ Route::middleware([
 
         Route::get('like/{image_id}', [LikeController::class, 'like'])
             ->name('like');
-        Route::get('dislike/{like_id}', [LikeController::class, 'dislike'])
+        Route::get('dislike/{image_id}', [LikeController::class, 'dislike'])
             ->name('dislike');
 
 

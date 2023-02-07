@@ -16,7 +16,19 @@
         </div>
 
     </div>
+    <div class="flex flex-row flex-col items-center mt-4  w-1/2 align-middle">
+    @foreach($images as $image)
+        <div class="basis-1/2">
 
+            <img src="{{asset('images_rrss/'.$image->image_path)}}" alt="">
+            <br>
+            {{$image->user->name.' '}}
+            {{$image->description}} <br>
+
+            Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
+            <br>
+            @endforeach
+        </div>
 
     <x-guest-layout>
         <x-jet-authentication-card>
@@ -33,6 +45,7 @@
             @endif
         </x-jet-authentication-card>
     </x-guest-layout>
+
 
 
 
