@@ -28,19 +28,14 @@
                             <br>
 
                                 <div class="w-10">
-                                    @foreach($likes as $like)
 
-                                        @if($like->user_id === Auth::id())
-                                            <img class="like" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
+                                        @if($image->likes->where('user_id', Auth::id())->where('image_id', $image->id)->isEmpty())
+                                            <img class="" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
                                         @else
-                                            <img class="" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
-
+                                            <img class="like" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
                                         @endif
-                                    @endforeach
 
-                                    @if(count($likes) == 0)
-                                            <img class="" id="corason" data-id="{{$image->id}}" src="images/Heart.svg" alt="corason">
-                                        @endif
+
                                 </div>
 
 

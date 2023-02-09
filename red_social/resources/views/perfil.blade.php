@@ -16,19 +16,27 @@
         </div>
 
     </div>
-    <div class="flex flex-row flex-col items-center mt-4  w-1/2 align-middle">
-    @foreach($images as $image)
-        <div class="basis-1/2">
 
-            <img src="{{asset('images_rrss/'.$image->image_path)}}" alt="">
-            <br>
-            {{$image->user->name.' '}}
-            {{$image->description}} <br>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="flex items-center mt-4">
+                    @foreach($images as $image)
+                        <div class="basis-1/2">
 
-            Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
-            <br>
-            @endforeach
+                            <img src="{{asset('images_rrss/'.$image->image_path)}}" alt="">
+                            <br>
+                            {{$image->user->name.' '}}
+                            {{$image->description}} <br>
+
+                            Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
+                            <br>
+                            @endforeach
+
+                </div>
+            </div>
         </div>
+    </div>
 
     <x-guest-layout>
         <x-jet-authentication-card>

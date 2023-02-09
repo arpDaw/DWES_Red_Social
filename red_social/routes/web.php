@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,8 @@ Route::middleware([
         Route::get('dislike/{image_id}', [LikeController::class, 'dislike'])
             ->name('dislike');
 
+        Route::get('usuarios', [UserController::class, 'usuarios'])
+            ->name('usuarios');
 
     });
 
