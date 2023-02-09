@@ -35,6 +35,8 @@ Route::middleware([
 
         Route::get('upload-image', [ImageController::class, 'uploadForm'])
             ->name('upload-image');
+        Route::get('deleteImage', [ImageController::class, 'deleteImage'])
+            ->name('deleteImage');
 
         Route::get('perfil', [PerfilController::class, 'perfil'])
             ->name('perfil');
@@ -54,7 +56,8 @@ Route::middleware([
 
         Route::get('usuarios', [UserController::class, 'usuarios'])
             ->name('usuarios');
-
+        Route::get('search', [UserController::class, 'search'])
+            ->name('search');
     });
 
 

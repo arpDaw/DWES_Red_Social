@@ -16,7 +16,7 @@
 
                 </div>
 
-                <div class="flex flex-row flex-col items-center mt-4">
+                <div class="flex flex-row flex-col items-center m-4">
                     @foreach($images as $image)
                         <div class="basis-1/2 w-full">
                             {{$image->user->name.' '}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +41,16 @@ class ImageController extends Controller
         return redirect()->route('upload-image');
 
     }
-    public function showImages(){
+    public function deleteImage($image_id){
 
+        $target = Image::where('id', $image_id);
+
+        if($target->delete()===false){
+            return response(
+                "No pudo eliminarse el usuario con el id {$target->id}",
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+        return redirect()->route('perfil');
     }
 }

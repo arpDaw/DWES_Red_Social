@@ -20,7 +20,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="flex items-center mt-4">
+                <div class="flex items-center m-4">
                     @foreach($images as $image)
                         <div class="basis-1/2">
 
@@ -31,6 +31,11 @@
 
                             Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
                             <br>
+                            @if($image->user_id === Auth::id())
+                                <form action="{{route('deleteImage')}}">
+                                <x-jet-button class="m-4">Eliminar</x-jet-button>
+                                </form>
+                            @endif
                             @endforeach
 
                 </div>
