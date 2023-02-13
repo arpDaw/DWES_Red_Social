@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -14,7 +16,18 @@ class UserController extends Controller
             'users' => $users
         ]);
     }
-    public function gente(){
+    public function viewUser($user_id){
+        $carbon = new Carbon();
+        $user = User::find($user_id);
+
+
+        $images = Image::orderBy('id')->where('user_id', '=', $user_id)->get();
+
+        return view('viewUser', [
+            'images' => $images,
+            'user' => $user,
+            'carbon' => $carbon
+        ]);
 
     }
     public function search(Request $request){

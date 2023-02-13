@@ -17,7 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('perfil') }}" :active="request()->routeIs('perfil')">
-                        {{ __('Perfil') }}
+                        {{ __('MiPerfil') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('usuarios')">
                         {{ __('Usuarios') }}

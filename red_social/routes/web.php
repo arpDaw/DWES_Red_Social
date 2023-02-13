@@ -58,6 +58,8 @@ Route::middleware([
             ->name('usuarios');
         Route::get('search', [UserController::class, 'search'])
             ->name('search');
+        Route::get('viewUser/{user_id}', [UserController::class, 'viewUser'])
+            ->name('viewUser');
     });
 
 

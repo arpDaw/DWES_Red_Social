@@ -28,13 +28,14 @@
                                 <img src="{{asset('storage/'.$user->profile_photo_path)}}" alt="">
                             </div>
                             <div class="pInfo ml-4">
-                                <span>Nombre: {{$user->name}}</span>
+                                <span >Nombre: {{$user->name}}</span>
                                 <br>
                                 <span>Nick: {{$user->username}}</span>
                             </div>
                             <div class="bPerfil m-4">
-                                <form method="GET" action="{{route('perfil')}}">
-                                    <x-jet-button>{{__(('Perfil'))}}</x-jet-button>
+                                <p>{{$user->id}}</p>
+                                <form action="{{route('viewUser', ['user_id' => $user->id])}}">
+                                    <x-jet-button>{{'Perfil'}}</x-jet-button>
                                 </form>
                             </div>
 
