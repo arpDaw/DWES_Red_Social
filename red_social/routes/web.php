@@ -62,6 +62,8 @@ Route::middleware([
             ->name('viewUser');
         Route::post('addFriend', [UserController::class, 'addFriend'])
             ->name('addFriend');
+        Route::post('acceptFriend', [UserController::class, 'acceptFriend'])
+            ->name('acceptFriend');
     });
 
 

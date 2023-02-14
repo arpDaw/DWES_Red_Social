@@ -7,6 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="flex items-center m-4">
                     <form action="{{route('search')}}" method="get">
@@ -38,11 +39,13 @@
                                     <x-jet-button>{{'Perfil'}}</x-jet-button>
                                 </form>
                                 @if($user->id != auth()->user()->id)
-                                    <form action="{{route('addFriend')}}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="friend" value="{{$user->id}}">
-                                    <x-jet-button>{{'Añadir amiwito'}}</x-jet-button>
-                                    </form>
+                                        @if($solicitudes->where('recipient_id', $user->id)->first()->status === 0)
+                                            <form action="{{route('addFriend')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="friend" value="{{$user->id}}">
+                                            <x-jet-button>{{'Añadir amiwito'}}</x-jet-button>
+                                            </form>
+                                        @endif
                                 @endif
                             </div>
 
