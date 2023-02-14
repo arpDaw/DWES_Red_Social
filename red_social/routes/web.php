@@ -60,6 +60,8 @@ Route::middleware([
             ->name('search');
         Route::get('viewUser/{user_id}', [UserController::class, 'viewUser'])
             ->name('viewUser');
+        Route::post('addFriend', [UserController::class, 'addFriend'])
+            ->name('addFriend');
     });
 
 

@@ -37,6 +37,13 @@
                                 <form action="{{route('viewUser', ['user_id' => $user->id])}}">
                                     <x-jet-button>{{'Perfil'}}</x-jet-button>
                                 </form>
+                                @if($user->id != auth()->user()->id)
+                                    <form action="{{route('addFriend')}}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="friend" value="{{$user->id}}">
+                                    <x-jet-button>{{'Añadir amiwito'}}</x-jet-button>
+                                    </form>
+                                @endif
                             </div>
 
                         @endforeach

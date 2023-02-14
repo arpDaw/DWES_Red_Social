@@ -38,5 +38,20 @@ class UserController extends Controller
     return view('usuarios', [
         'users'=> $users
     ]);
+
+    }
+
+    public function addFriend(Request $request){
+
+        $user_id = $request->input('friend');
+        $recipient = User::find($user_id);
+
+        auth()->user()->befriend($recipient);
+
+        $users = User::orderBy('id')->get();
+        return view('usuarios', [
+            'users'=> $users
+        ]);
+
     }
 }
