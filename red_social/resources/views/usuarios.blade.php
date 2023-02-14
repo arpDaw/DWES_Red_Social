@@ -39,12 +39,19 @@
                                     <x-jet-button>{{'Perfil'}}</x-jet-button>
                                 </form>
                                 @if($user->id != auth()->user()->id)
-                                        @if($solicitudes->where('recipient_id', $user->id)->first()->status === 0)
-                                            <form action="{{route('addFriend')}}" method="POST">
+                                        @if($solicitudes->where('recipient_id', '=', auth()->user()->id)->first() &&
+                                            $solicitudes->where('sender_id', '=', $user->id)->first())
+                                            <form action="{{route('acceptFriend')}}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="sender" value="{{$user->id}}">
+                                            <x-jet-button>{{'Aceptar amiwito'}}</x-jet-button>
+                                            </form>
+                                        @else {{--Aquí hay que poner que muestre el botón si la friendship no existe --}}
+                                        <form action="{{route('addFriend')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="friend" value="{{$user->id}}">
                                             <x-jet-button>{{'Añadir amiwito'}}</x-jet-button>
-                                            </form>
+                                        </form>
                                         @endif
                                 @endif
                             </div>
