@@ -22,16 +22,21 @@
         <div class="flex gap-10  mx-auto sm:px-6 lg:px-8">
             <div class="panelSolicitudes">
                 @if(count($solicitudes) > 0) {{-- Comprueba si hay solicitudes pendientes --}}
+                    <div>
+                        <h1>Solicitudes: </h1>
                 @foreach($solicitudes as $solicitud)
-
-                    @if($solicitud->sender_id === auth()->user()->id)
-                        <div>
-                            <img src="{{asset('storage/'.$usuarios->where('id', '=', $solicitud->recipient_id)->first()->profile_photo_path)}}" alt="">
-                            <span>{{$usuarios->where('id', '=', $solicitud->recipient_id)->first()->username}}</span>
-                            <br>
-                            <x-jet-button>Cancelar Solicitud</x-jet-button>
-                        </div>
-                    @endif
+{{--                    @if($solicitud->sender_id === auth()->user()->id)--}}
+{{--                                <form action="{{route('denyFriend')}}" method="POST">--}}
+{{--                                    @csrf--}}
+{{--                        <div>--}}
+{{--                            <img src="{{asset('storage/'.$usuarios->where('id', '=', $solicitud->recipient_id)->first()->profile_photo_path)}}" alt="">--}}
+{{--                            <span>{{$usuarios->where('id', '=', $solicitud->recipient_id)->first()->username}}</span>--}}
+{{--                            <br>--}}
+{{--                            <input type="hidden" name="sender" value="{{$solicitud->sender_id}}">--}}
+{{--                            <x-jet-button>Cancelar Solicitud</x-jet-button>--}}
+{{--                        </div>--}}
+{{--                                </form>--}}
+{{--                    @endif--}}
                     @if($solicitud->recipient_id === auth()->user()->id)
                         <div>
                         <img src="{{asset('storage/'.$usuarios->where('id', '=', $solicitud->sender_id)->first()->profile_photo_path)}}" alt="">
@@ -42,11 +47,31 @@
                                 <input type="hidden" name="sender" value="{{$solicitud->sender_id}}">
                                 <x-jet-button>Aceptar Solicitud</x-jet-button>
                             </form>
+                            <form action="{{route('denyFriend')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="sender" value="{{$solicitud->sender_id}}">
+                                <x-jet-button>Cancelar Solicitud</x-jet-button>
+                            </form>
                      </div>
                     @endif
                 @endforeach
-
+                    </div>
                 @endif
+
+                @if(count($amigos) > 0)
+                        <div>
+                        <h1>Amigos:</h1>
+                    @foreach($amigos as $amigo)
+                        <div>
+
+                            <img src="{{asset('storage/'.$amigo->profile_photo_path)}}" alt="">
+                            <span>{{$amigo->name}}</span>
+
+                        </div>
+                        @endforeach
+                        </div>
+                    @endif
+
             </div>
             <div class="bg-white max-w-7xl overflow-hidden shadow-xl sm:rounded-lg">
 

@@ -53,9 +53,13 @@ class UserController extends Controller
         auth()->user()->befriend($recipient);
 
         $users = User::orderBy('id')->get();
-        return view('usuarios', [
-            'users'=> $users
-        ]);
+        return redirect()->route('usuarios');
+    }
+
+    public function cancelRequest(Request $request){
+
+        $solicitud = $request->input('solicitud');
+
 
     }
 
@@ -77,4 +81,12 @@ class UserController extends Controller
             'solicitudes' => $solicitudesPendientes,
         ]);
     }
+
+    public function denyFriend(Request $request){
+        $sender_id = $request->input('sender');
+        $sender = User::find($sender_id);
+        auth()->user()->denyFriendRequest($sender);
+        return redirect()->route('perfil');
+    }
+
 }

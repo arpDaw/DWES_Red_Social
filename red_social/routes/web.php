@@ -64,6 +64,8 @@ Route::middleware([
             ->name('addFriend');
         Route::post('acceptFriend', [UserController::class, 'acceptFriend'])
             ->name('acceptFriend');
+        Route::post('denyFriend', [UserController::class, 'denyFriend'])
+            ->name('denyFriend');
     });
 
 

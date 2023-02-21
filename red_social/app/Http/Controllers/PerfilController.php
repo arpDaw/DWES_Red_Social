@@ -15,12 +15,14 @@ class PerfilController extends Controller
         $usuarios = User::orderBy('id')->get();
         $carbon = new Carbon();
         $solicitudesPendientes = auth()->user()->getPendingFriendships();
+        $amigos = auth()->user()->getFriends();
 
         return view('perfil', [
             'images' => $images,
             'carbon' => $carbon,
             'solicitudes' => $solicitudesPendientes,
-            'usuarios' => $usuarios
+            'usuarios' => $usuarios,
+            'amigos' => $amigos
 
         ]);
     }
