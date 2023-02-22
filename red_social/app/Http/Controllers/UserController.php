@@ -41,8 +41,12 @@ class UserController extends Controller
         ->orWhere('name', 'LIKE', '%'. $request->user. '%')
         ->orWhere('surname', 'LIKE', '%'. $request->user. '%')
         ->get();
+        $solicitudesPendientes = auth()->user()->getPendingFriendships();
+        $amigos = auth()->user()->getFriends();
     return view('usuarios', [
-        'users'=> $users
+        'users'=> $users,
+        'solicitudes' => $solicitudesPendientes,
+        'amigos' => $amigos
     ]);
 
     }
@@ -76,11 +80,13 @@ class UserController extends Controller
         $carbon = new Carbon();
         $solicitudesPendientes = auth()->user()->getPendingFriendships();
         $usuarios = User::orderBy('id')->get();
+        $amigos = auth()->user()->getFriends();
         return view('perfil', [
             'usuarios' => $usuarios,
             'images' => $images,
             'carbon' => $carbon,
             'solicitudes' => $solicitudesPendientes,
+            'amigos' => $amigos,
         ]);
     }
 

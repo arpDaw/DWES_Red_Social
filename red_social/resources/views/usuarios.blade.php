@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white flex overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="flex items-center m-4">
                     <form action="{{route('search')}}" method="get">
                         @csrf
@@ -26,7 +26,7 @@
                     <div class="resultados flex items-center m-4">
                         @foreach($users as $user)
 
-                            <div class="pfp scale-155">
+                            <div class="pfp flex-auto">
                                 <img src="{{asset('storage/'.$user->profile_photo_path)}}" alt="">
                             </div>
                             <div class="pInfo ml-4">
@@ -56,7 +56,18 @@
                                             <x-jet-button>{{'procesando'}}</x-jet-button>
                                         @endif
 
-                                            @if(!auth()->user()->isFriendWith($user))
+                                            @if(!auth()->user()->isFriendWith($user) &&
+                                                !(
+                                                    $solicitudes->where('recipient_id', '=', $user->id)->first()
+                                                    &&
+                                                    $solicitudes->where('sender_id', '=', auth()->user()->id)->first()
+                                                    ) &&
+                                                        !(
+                                                            $solicitudes->where('recipient_id', '=', auth()->user()->id)->first()
+                                                            &&
+                                                            $solicitudes->where('sender_id', '=', $user->id)->first()
+                                                        )
+                                                )
                                                 <form action="{{route('addFriend')}}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="friend" value="{{$user->id}}">

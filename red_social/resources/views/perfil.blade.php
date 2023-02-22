@@ -22,10 +22,11 @@
         <div class="flex gap-10  mx-auto sm:px-6 lg:px-8">
             <div class="panelSolicitudes">
                 @if(count($solicitudes) > 0) {{-- Comprueba si hay solicitudes pendientes --}}
+                <div>
+                    <h1>Solicitudes pendientes:</h1>
+                </div>
                 @foreach($solicitudes as $solicitud)
-                    @if($solicitud->sender_id != auth()->user()->id)
-                        <div>
-                            <h1>Solicitudes:</h1>
+
                     @if($solicitud->recipient_id === auth()->user()->id)
                         <div>
                         <img src="{{asset('storage/'.$usuarios->where('id', '=', $solicitud->sender_id)->first()->profile_photo_path)}}" alt="">
@@ -41,12 +42,13 @@
                                 <input type="hidden" name="sender" value="{{$solicitud->sender_id}}">
                                 <x-jet-button>Cancelar Solicitud</x-jet-button>
                             </form>
-                     </div>@endif
-                    </div>
-                    @endif
+                     </div>
+                            @endif
                 @endforeach
-
-
+                @else
+                    <div>
+                        <h1>No hay solicitudes pendientes</h1>
+                    </div>
                 @endif
 
                 @if(count($amigos) > 0)
