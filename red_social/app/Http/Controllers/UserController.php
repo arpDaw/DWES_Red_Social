@@ -14,10 +14,12 @@ class UserController extends Controller
     public function usuarios(){
         $users = User::orderBy('id')->get();
         $solicitudesPendientes = auth()->user()->getPendingFriendships();
+        $amigos = auth()->user()->getFriends();
 
         return view('usuarios', [
             'users' => $users,
-            'solicitudes' => $solicitudesPendientes
+            'solicitudes' => $solicitudesPendientes,
+            'amigos' => $amigos
         ]);
     }
     public function viewUser($user_id){

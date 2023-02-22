@@ -25,6 +25,7 @@
 
                     <div class="resultados flex items-center m-4">
                         @foreach($users as $user)
+
                             <div class="pfp scale-155">
                                 <img src="{{asset('storage/'.$user->profile_photo_path)}}" alt="">
                             </div>
@@ -46,13 +47,22 @@
                                             <input type="hidden" name="sender" value="{{$user->id}}">
                                             <x-jet-button>{{'Aceptar amiwito'}}</x-jet-button>
                                             </form>
-                                        @else {{--Aquí hay que poner que muestre el botón si la friendship no existe --}}
-                                        <form action="{{route('addFriend')}}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="friend" value="{{$user->id}}">
-                                            <x-jet-button>{{'Añadir amiwito'}}</x-jet-button>
-                                        </form>
                                         @endif
+
+                                        @if($solicitudes->where('recipient_id', '=', $user->id)->first()
+                                            &&
+                                            $solicitudes->where('sender_id', '=', auth()->user()->id)->first()
+                                            )
+                                            <x-jet-button>{{'procesando'}}</x-jet-button>
+                                        @endif
+
+                                            @if(!auth()->user()->isFriendWith($user))
+                                                <form action="{{route('addFriend')}}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="friend" value="{{$user->id}}">
+                                                    <x-jet-button>{{'Añadir amiwito'}}</x-jet-button>
+                                                </form>
+                                            @endif
                                 @endif
                             </div>
 
