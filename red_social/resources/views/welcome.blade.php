@@ -52,7 +52,8 @@
         <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Tivo</a> -->
 
         <!-- Image Logo -->
-        <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a>
+        <a class="navbar-brand logo-image" href="index.html"><img src="images/Playstation_logo_colour.svg" alt="alternative"><label
+                for="img">Red Social</label></a>
 
         <!-- Mobile Menu Toggle Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,8 +114,8 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <h1>SaaS App HTML Landing Page</h1>
-                        <p class="p-large">Use Tivo to automate your marketing actions in order to reach a much larger audience</p>
+                        <h1>Red Social</h1>
+                        <p class="p-large">¡Use nuestra red social para expresarse!</p>
                         <a class="btn-solid-lg page-scroll" href="{{route('register')}}">SIGN UP</a>
                     </div> <!-- end of text-container -->
                 </div> <!-- end of col -->

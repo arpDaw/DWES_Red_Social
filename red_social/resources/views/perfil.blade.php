@@ -80,7 +80,9 @@
                             Subido hace: {{$carbon->parse($image->created_at)->longAbsoluteDiffForHumans()}}
                             <br>
                             @if($image->user_id === Auth::id())
-                                <form action="{{route('deleteImage')}}">
+                                <form action="{{route('deleteImage', $image->id)}}" method="POST">
+                                    @csrf
+                                    @method('delete')
                                 <x-jet-button class="m-4">Eliminar</x-jet-button>
                                 </form>
                             @endif

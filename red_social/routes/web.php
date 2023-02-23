@@ -35,7 +35,7 @@ Route::middleware([
 
         Route::get('upload-image', [ImageController::class, 'uploadForm'])
             ->name('upload-image');
-        Route::get('deleteImage', [ImageController::class, 'deleteImage'])
+        Route::delete('deleteImage/{id}', [ImageController::class, 'deleteImage'])
             ->name('deleteImage');
 
         Route::get('perfil', [PerfilController::class, 'perfil'])

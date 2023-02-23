@@ -33,9 +33,11 @@ class CommentController extends Controller
         if($comment->delete() === false){
             return response(
                 "No pudo eliminarse el usuario con el id {$comment->id}",
-                Response::HTTP_BAD_REQUEST
+                Response::HTTP_BAD_REQUEST,
+
             );
         }
+        return redirect()->route('dashboard');
 //        return response(["id" => $request->id, "deleted"=>true], Response::HTTP_OK);
 
     }
